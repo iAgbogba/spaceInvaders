@@ -4,16 +4,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
-public class Alien extends Fusée{
-    private static final int vitesse=2;
+public class Alien extends Fusee{
+    private static final int vitesseY=10;
+    private static final int vitesseX=2;
     private static int direction=0;
 
     public static void setDirection(int direction) {
         Alien.direction = direction;
-    }
-
-    public static int getVitesse() {
-        return vitesse;
     }
 
     public static int getDirection() {
@@ -38,13 +35,13 @@ public class Alien extends Fusée{
         gc.setFill(Color.grayRgb(20));
         gc.fillRect(posX,posY,size,size);
         if(deplacement_y){
-            posY+=vitesse;
+            posY+=vitesseY;
         }
         if(direction==0) {
-            posX += vitesse;
+            posX += vitesseX;
 
         }else if(direction==1){
-            posX -= vitesse;
+            posX -= vitesseX;
         }
         affiche(gc);
     }
