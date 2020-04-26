@@ -71,9 +71,7 @@ public class SpaceInvaders extends Application
                     joueur.moveRight(gc);
                     break;
                 case SPACE:
-                    Tir tir=new Tir(joueur.posX+TAILLE_JOUEUR/2-3,joueur.posY-TAILLE_JOUEUR);
-                    tirs.add(tir);
-                    tir.affiche(gc);
+                    creerTir();
                     break;
             }
         });
@@ -112,6 +110,21 @@ public class SpaceInvaders extends Application
             Image BOOM_IMG = new Image("boom.png");
             Fusee joueurMort =new Fusee(joueur.posX,joueur.posY,TAILLE_JOUEUR,BOOM_IMG);
             joueurMort.affiche(gc);
+        }
+    }
+
+    public void creerTir()
+    {
+        Tir tir=new Tir(joueur.posX+TAILLE_JOUEUR/2-3,joueur.posY-TAILLE_JOUEUR,0);
+        tirs.add(tir);
+        tir.afficheJoueur(gc);
+        if (niveau >= 3)
+        {
+            Tir tir1=new Tir(joueur.posX+TAILLE_JOUEUR/2-3,joueur.posY-TAILLE_JOUEUR,1);
+            Tir tir2=new Tir(joueur.posX+TAILLE_JOUEUR/2-3,joueur.posY-TAILLE_JOUEUR,-1);
+            tirs.add(tir1);
+            tirs.add(tir2);
+            tir.afficheJoueur(gc);
         }
     }
 
@@ -189,7 +202,7 @@ public class SpaceInvaders extends Application
         boolean aSupprimer = false;
         for(int i=0;i<tirs.size();i++){
             aSupprimer = false;
-            tirs.get(i).update(gc);
+            tirs.get(i).update_joueur(gc);
             for(int j=0;j<aliens.size();j++){
                 if (tirs.get(i).collision(aliens.get(j))) 
                 {
@@ -278,7 +291,7 @@ public class SpaceInvaders extends Application
     {
         for(int i=0;i<aliens.size();i++) {
 
-            Tir tir = new Tir(aliens.get(i).posX + TAILLE_JOUEUR /2 - 3, aliens.get(i).posY + TAILLE_JOUEUR);
+            Tir tir = new Tir(aliens.get(i).posX + TAILLE_JOUEUR /2 - 3, aliens.get(i).posY + TAILLE_JOUEUR, 0);
             tirs_aliens.add(tir);
         }
     }
