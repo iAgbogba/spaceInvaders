@@ -32,7 +32,7 @@ public class SpaceInvaders extends Application
     private ArrayList<Alien> aliensMort = new ArrayList<Alien>();
     private ArrayList<Tir> tirs_aliens = new ArrayList<Tir>();
     private int temps=0;
-    private int nbreVieJoueur=100;
+    private int nbreVieJoueur=3;
     private int score=0;
     private int maxDiffHauteur = 30;
     private int nbreIteration = 0;
