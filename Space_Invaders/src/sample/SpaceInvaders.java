@@ -32,12 +32,14 @@ public class SpaceInvaders extends Application
     private ArrayList<Alien> aliensMort = new ArrayList<Alien>();
     private ArrayList<Tir> tirs_aliens = new ArrayList<Tir>();
     private int temps=0;
-    private int nbreVieJoueur=3;
+    private int nbreVieJoueur=30;
     private int score=0;
     private int maxDiffHauteur = 30;
     private int nbreIteration = 0;
     private int minX = 0;
     private int maxX = 0;
+    private int niveau = 1;
+    private int espacement = 50;
 
 
 
@@ -116,11 +118,15 @@ public class SpaceInvaders extends Application
     public void creerAllien()
     {
         Image ALIEN_IMG = new Image("alien.png");
-        for(int i=0;i<NOMBRE_ALIENS;i++){
-                Alien alien=new Alien(50+i*(TAILLE_JOUEUR+50),50,TAILLE_JOUEUR,ALIEN_IMG);
-                aliens.add(alien);
-                alien.affiche(gc);
+        for (int niv = 0 ; niv<niveau; niv++)
+        {
+            for(int i=0;i<NOMBRE_ALIENS;i++){
+                    Alien alien=new Alien(50+i*(TAILLE_JOUEUR+50),(50 + (espacement * niv)),TAILLE_JOUEUR,ALIEN_IMG);
+                    aliens.add(alien);
+                    alien.affiche(gc);
+            }
         }
+        nbreIteration = 0;
     }
     public void finDePartie()
     {
@@ -241,16 +247,15 @@ public class SpaceInvaders extends Application
             setMaxAndMinX();
             // int minX=aliens.get(0).posX,maxX=aliens.get(aliens.size()-1).posX;
             boolean move_y=false;
-            for(int j=0;j<aliens.size();j++){
+            for(int j=0;j<aliens.size();j++)
+            {
                 if(aliens.get(j).getDirection()==0 && maxX==(STOP_RIGHT))
                 {
-                    versLeBas();
                     move_y=true;
                     aliens.get(j).setDirection(1);
                 } 
                 if(aliens.get(j).getDirection()==1&&minX==(STOP_LEFT))
                 {
-                    versLeBas();
                     move_y=true;
                     aliens.get(j).setDirection(0);
                 }
@@ -261,6 +266,12 @@ public class SpaceInvaders extends Application
                     joueurToucher();
                 }
             }
+            //if (move_y) versLeBas();
+        }
+        else 
+        {
+            niveau++;
+            creerAllien();
         }
     }
     private void tir_alien()
